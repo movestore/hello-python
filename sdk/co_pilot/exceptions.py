@@ -1,2 +1,0 @@
-class InvalidAppConfiguration(Exception):
-    pass

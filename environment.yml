@@ -1,4 +1,4 @@
-name: co-pilot-python
+name: hello-python
 channels:
   - conda-forge
 dependencies:
