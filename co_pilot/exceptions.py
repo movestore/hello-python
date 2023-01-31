@@ -1,0 +1,2 @@
+class InvalidAppConfiguration(Exception):
+    pass
