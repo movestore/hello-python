@@ -4,7 +4,6 @@ import json
 import os
 import logging
 from co_pilot.co_pilot_spec import CoPilotSpec, HOOK_NAMESPACE
-from co_pilot.exceptions import InvalidAppConfiguration
 from co_pilot.moveapps_io import MoveAppsIo
 
 PROJECT_NAME = "co-pilot-python"
@@ -54,12 +53,6 @@ class CoPilotPythonSdk:
         pd.to_pickle(data, os.environ.get('OUTPUT_FILE', 'resources/output/output.pickle'))
 
     def moveapps_run(self, data, config):
-        validation_results = self._pm.hook.validate_configuration(config=config)
-        logging.info(f'configuration validation result: {validation_results}')
-        if False in validation_results:
-            logging.warning("configuration is not valid!")
-            raise InvalidAppConfiguration("App configuration is invalid!")
-
         outputs = self._pm.hook.execute(data=data, config=config)
         return outputs[0]
 

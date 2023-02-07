@@ -34,4 +34,4 @@ class MoveAppsIo:
                     )
                     return provided_dir
         logging.warning(f'No files present for app-files \'{appspec_local_file_setting_id}\': User did not '
-                                f'upload anything and the app did not provide fallback files.')
+                        f'upload anything and the app did not provide fallback files.')
