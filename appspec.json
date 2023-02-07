@@ -18,7 +18,7 @@
   "providedAppFiles": [
     {
       "settingId": "myFiles",
-      "from": "resources/local_app_files/provided-app-files/my_files"
+      "from": "resources/local_app_files/provided-app-files/myFiles"
     }
   ],
   "createsArtifacts": true,
