@@ -9,21 +9,12 @@ class App(object):
         self.moveapps_io = moveapps_io
 
     @hook_impl
-    def validate_configuration(self, config: dict) -> bool:
-        if 'individualLocalIdentifier' in config:
-            return True
-        else:
-            return False
-
-    @hook_impl
     def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
         self.print_input(data)
 
         animal_id_config = config['individualLocalIdentifier']
-        if animal_id_config == "":
-            animal_id_config = None
 
-        if animal_id_config is not None:
+        if animal_id_config:
             animal_traj = data.filter('individual.local.identifier', animal_id_config)
             plot = animal_traj.plot(legend=True, figsize=(9, 9), linewidth=4)
             plot.figure.savefig(self.moveapps_io.create_artifacts_file(f'{animal_id_config}.png'))

@@ -8,12 +8,6 @@ hook_impl = pluggy.HookimplMarker(HOOK_NAMESPACE)
 
 class CoPilotSpec(object):
     @hook_spec
-    def validate_configuration(self, config: dict) -> bool:
-        """Validate the configuration
-        """
-        pass
-
-    @hook_spec
     def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
         """Execute your business logic
 

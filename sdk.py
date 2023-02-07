@@ -20,7 +20,7 @@ class CoPilotPythonSdk:
         self._pm = pluggy.PluginManager(HOOK_NAMESPACE)
         self._pm.add_hookspecs(CoPilotSpec)
         self.hooks = active_hooks
-        if hooks:
+        if self.hooks:
             for hook in self.hooks:
                 self._pm.register(hook)
 
@@ -50,20 +50,21 @@ class CoPilotPythonSdk:
 
     @staticmethod
     def store_output(data):
+        logging.info(f'storing output: {data}')
         pd.to_pickle(data, os.environ.get('OUTPUT_FILE', 'resources/output/output.pickle'))
 
     def moveapps_run(self, data, config):
-        valid = self._pm.hook.validate_configuration(config=config)
-        if False in valid:
+        validation_results = self._pm.hook.validate_configuration(config=config)
+        logging.info(f'configuration validation result: {validation_results}')
+        if False in validation_results:
             logging.warning("configuration is not valid!")
             raise InvalidAppConfiguration("App configuration is invalid!")
 
-        output = self._pm.hook.execute(data=data, config=config)
-        return output
+        outputs = self._pm.hook.execute(data=data, config=config)
+        return outputs[0]
 
 
 if __name__ == "__main__":
-    print(os.getcwd())
     from app.app import App
     # LIFO
     hooks = [App(moveapps_io=MoveAppsIo())]
