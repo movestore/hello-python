@@ -6,6 +6,19 @@
       "description": "Plots the trajectory of the given individual local identifier. Leave empty for plotting all individuals in one plot",
       "defaultValue": null,
       "type": "STRING"
+    },
+    {
+      "id": "myFiles",
+      "name": "Upload Files",
+      "description": "You can provide your own files. Expected file name is `my-machine.txt`",
+      "defaultValue": null,
+      "type": "LOCAL_FILE"
+    }
+  ],
+  "providedAppFiles": [
+    {
+      "settingsId": "myFiles",
+      "from": "resources/local_app_files/provided_app_files/my_files"
     }
   ],
   "createsArtifacts": true,

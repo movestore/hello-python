@@ -1,0 +1,1 @@
+This file was provided by the app developer. It is the fallback if the user did not upload its own file.
