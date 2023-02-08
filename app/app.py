@@ -30,9 +30,8 @@ class App(object):
         logging.info(geopandas['individual.local.identifier'].unique())
 
     def __do_something(self, app_input: TrajectoryCollection, config: dict) -> TrajectoryCollection:
-        animal_id_config = config['individualLocalIdentifier']
-
-        if animal_id_config:
+        if 'individualLocalIdentifier' in config and config['individualLocalIdentifier']:
+            animal_id_config = config['individualLocalIdentifier']
             animal_traj = app_input.filter('individual.local.identifier', animal_id_config)
             plot = animal_traj.plot(legend=True, figsize=(9, 9), linewidth=4)
             plot.figure.savefig(self.moveapps_io.create_artifacts_file(f'{animal_id_config}.png'))
@@ -48,8 +47,9 @@ class App(object):
 
     def _consume_app_file(self):
         app_file_root_dir = self.moveapps_io.get_app_file_path('myFiles')
-        expected_file = os.path.join(app_file_root_dir, 'my-machine.txt')
-        with open(expected_file) as f:
-            content = f.read()
-            logging.info(content)
-            return content
+        if app_file_root_dir:
+            expected_file = os.path.join(app_file_root_dir, 'my-machine.txt')
+            with open(expected_file) as f:
+                content = f.read()
+                logging.info(content)
+                return content
