@@ -31,16 +31,23 @@ class App(object):
 
     def __do_something(self, app_input: TrajectoryCollection, config: dict) -> TrajectoryCollection:
         for traj in app_input.trajectories:
-            logging.info(f'Trajectory in my input ({traj.id}|{traj.obj_id}): {traj} // {traj.df}')
+            logging.info(f'Trajectory in my input ({traj.id}|{traj.obj_id}):')
+            logging.info(traj)
 
         if 'individualLocalIdentifier' in config and config['individualLocalIdentifier']:
-            animal_id_config = config['individualLocalIdentifier']
+            animal_id_config: str = config['individualLocalIdentifier']
             if animal_id_config == 'error':
                 raise ValueError("testing exceptions")
-            animal_traj = app_input.filter('individual.local.identifier', animal_id_config)
+
+            # we receive the configuration value (normally) as string, try to parse it to int
+            filter_by_id = \
+                int(animal_id_config) if isinstance(animal_id_config, str) and animal_id_config.isdecimal() \
+                else animal_id_config
+
+            animal_traj = app_input.filter('individual.local.identifier', filter_by_id)
             plot = animal_traj.plot(legend=True, figsize=(9, 9), linewidth=4)
-            plot.figure.savefig(self.moveapps_io.create_artifacts_file(f'{animal_id_config}.png'))
-            logging.info(f'saved plot of individual {animal_id_config}')
+            plot.figure.savefig(self.moveapps_io.create_artifacts_file(f'{filter_by_id}.png'))
+            logging.info(f'saved plot of individual {filter_by_id}')
             # output of this app will be just the requested individuals
             return animal_traj
         else:
