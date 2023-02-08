@@ -30,6 +30,9 @@ class App(object):
         logging.info(geopandas['individual.local.identifier'].unique())
 
     def __do_something(self, app_input: TrajectoryCollection, config: dict) -> TrajectoryCollection:
+        for traj in app_input.trajectories:
+            logging.info(f'Trajectory in my input ({traj.id}|{traj.obj_id}): {traj} // {traj.df}')
+
         if 'individualLocalIdentifier' in config and config['individualLocalIdentifier']:
             animal_id_config = config['individualLocalIdentifier']
             if animal_id_config == 'error':
