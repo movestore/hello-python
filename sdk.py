@@ -44,8 +44,11 @@ class CoPilotPythonSdk:
 
     @staticmethod
     def load_config():
-        config = os.environ.get('CONFIGURATION', '''{"individualLocalIdentifier": "Nemo blue"}''')
-        return json.loads(config)
+        config = os.environ.get('CONFIGURATION', '{}')
+        parsed = json.loads(config)
+        if os.environ.get("PRINT_CONFIGURATION", "no") == "yes":
+            logging.info(f'app will be started with configuration: {parsed}')
+        return parsed
 
     @staticmethod
     def store_output(data):
