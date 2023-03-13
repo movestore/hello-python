@@ -17,7 +17,7 @@ class App(object):
         self.__print_input(data)
 
         # showcase consuming `LOCAL_FILE`
-        self._consume_app_file()
+        logging.info(f'File size: {self._consume_app_file()}')
 
         # showcase doing something with the app input
         output = self.__do_something(app_input=data, config=config)
@@ -63,10 +63,8 @@ class App(object):
         app_file_root_dir = self.moveapps_io.get_app_file_path('myFiles')
         if app_file_root_dir:
             expected_file = os.path.join(app_file_root_dir, 'my-machine.txt')
-            with open(expected_file) as f:
-                content = f.read()
-                logging.info(content)
-                return content
+            file_size = os.path.getsize(expected_file)
+            return file_size
 
     @staticmethod
     def __crash(config: dict):

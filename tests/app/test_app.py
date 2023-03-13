@@ -21,7 +21,7 @@ class MyTestCase(unittest.TestCase):
         actual = self.sut._consume_app_file()
 
         # verif
-        self.assertEqual("hello world", actual)
+        self.assertEqual(11, actual)
 
     def test_filter_output(self):
         # prepare
