@@ -12,6 +12,8 @@ class App(object):
 
     @hook_impl
     def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
+        self.__crash(config=config)
+
         self.__print_input(data)
 
         # showcase consuming `LOCAL_FILE`
@@ -65,3 +67,8 @@ class App(object):
                 content = f.read()
                 logging.info(content)
                 return content
+
+    @staticmethod
+    def __crash(config: dict):
+        if 'forceCrash' in config and config['forceCrash']:
+            raise Exception("You ask me to throw this exception!")

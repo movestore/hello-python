@@ -25,7 +25,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_filter_output(self):
         # prepare
-        testdata: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/input2.pickle'))
+        testdata: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/app/input2.pickle'))
         config = {
             "individualLocalIdentifier": 742
         }
@@ -40,7 +40,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_full_output_missing_key(self):
         # prepare
-        testdata: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/input2.pickle'))
+        testdata: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/app/input2.pickle'))
         config = {}
         self.assertEqual(3, len(testdata.trajectories))
 
@@ -52,7 +52,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_full_output_null_key(self):
         # prepare
-        testdata: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/input2.pickle'))
+        testdata: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/app/input2.pickle'))
         config = {
             "individualLocalIdentifier": None
         }
@@ -63,3 +63,15 @@ class MyTestCase(unittest.TestCase):
 
         # verify
         self.assertEqual(3, len(actual.trajectories))
+
+    def test_crash(self):
+        # prepare
+        testdata: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/app/input2.pickle'))
+
+        config = {
+            "forceCrash": True
+        }
+
+        # execute
+        with self.assertRaises(Exception):
+            self.sut.execute(data=testdata, config=config)

@@ -13,6 +13,13 @@
       "description": "You can provide your own files. Expected file name is `my-machine.txt`",
       "defaultValue": null,
       "type": "LOCAL_FILE"
+    },
+    {
+      "id": "forceCrash",
+      "name": "Force crash?",
+      "description": "Should the app crash?",
+      "defaultValue": false,
+      "type": "CHECKBOX"
     }
   ],
   "providedAppFiles": [
