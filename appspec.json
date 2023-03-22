@@ -35,14 +35,16 @@
   "language": "eng",
   "keywords": [
     "example",
-    "template"
+    "template",
+    "poc",
+    "debug"
   ],
   "people": [
     {
-      "firstName": "Charles",
+      "firstName": "Clemens",
       "middleInitials": null,
-      "lastName": "Darwin",
-      "email": "creator@example.com",
+      "lastName": "Hahn",
+      "email": "support@moveapps.org",
       "roles": [
         "author",
         "creator"
@@ -52,21 +54,8 @@
       "affiliationRor": null
     }
   ],
-  "funding": [
-    {
-      "name": "funder name",
-      "comment": "grant for App"
-    }
-  ],
-  "references": [
-    {
-      "type": "IsDescribedBy",
-      "note": "Darwin, C. 1900. The creation. Journal XY. 1-2",
-      "url": "https://anylink.xyz"
-    }
-  ],
   "documentation": {
-    "url": "https://github.com/yourAccount/my-app/README.md"
+    "url": "https://github.com/movestore/hello-python/blob/main/README.md"
   }
 }
 
